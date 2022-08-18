@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -47,19 +46,19 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <form class="wpo-accountWrapper" action="#">
+                    <form class="wpo-accountWrapper" action="<?= base_url() ?>auth/login" method="post">
                         <div class="wpo-accountInfo">
                             <div class="wpo-accountInfoHeader">
                                 <a href="#"><img src="<?= base_url() ?>assets/images/logo-2.png" alt=""></a>
-                                    <a class="wpo-accountBtn" href="<?= base_url('auth/register') ?>">
-                                        <span class="">Create Account</span>
-                                    </a>
+                                <a class="wpo-accountBtn" href="<?= base_url('auth/register') ?>">
+                                    <span class="">Register</span>
+                                </a>
                             </div>
                             <div class="image">
                                 <img src="<?= base_url() ?>assets/images/login.svg" alt="">
                             </div>
                             <div class="back-home">
-                                <a class="wpo-accountBtn" href="index.html">
+                                <a class="wpo-accountBtn" href="<?= base_url() ?>">
                                     <span class="">Back To Home</span>
                                 </a>
                             </div>
@@ -67,44 +66,38 @@
                         <div class="wpo-accountForm form-style">
                             <div class="fromTitle">
                                 <h2>Login</h2>
-                                <p>Sign into your pages account</p>
+                                <p>Sign into your account</p>
                             </div>
+
+                            <?php if ($this->session->flashdata('message')) {
+                                echo $this->session->flashdata('message');
+                                // set time out alert
+                                echo '<script>setTimeout(function() {
+                                            $(".alert").fadeOut("slow");
+                                        }, 3000);</script>';
+                            } ?>
+
                             <div class="row">
                                 <div class="col-lg-12 col-md-12 col-12">
-                                    <label>Email</label>
-                                    <input type="text" id="email" name="email" placeholder="demo@gmail.com">
+                                    <label>Username</label>
+                                    <input type="text" id="username" name="username" placeholder="Input username">
                                 </div>
                                 <div class="col-lg-12 col-md-12 col-12">
                                     <div class="form-group">
-                                        <label >Password</label>
-                                        <input class="pwd6" type="password" placeholder=""  value="123456" name="pass">
+                                        <label>Password</label>
+                                        <input class="pwd6" type="password" placeholder="" name="password" placeholder="password">
                                         <span class="input-group-btn">
                                             <button class="btn btn-default reveal6" type="button"><i class="fa fa-eye"></i></button>
                                         </span>
                                     </div>
                                 </div>
-                                <div class="col-lg-12 col-md-12 col-12">
-                                    <div class="check-box-wrap">
-                                        <div class="input-box">
-                                            <input type="checkbox" id="fruit4" name="fruit-4" value="Strawberry">
-                                            <label for="fruit4">Remember Me</label>
-                                        </div>
-                                        <div class="forget-btn">
-                                            <a href="forgot.html">Forgot Password?</a>
-                                        </div>
-                                    </div>
-                                </div>
+
                                 <div class="col-lg-12 col-md-12 col-12">
                                     <button type="submit" class="wpo-accountBtn">Login</button>
                                 </div>
                             </div>
                             <h4 class="or"><span>OR</span></h4>
-                            <ul class="wpo-socialLoginBtn">
-                                <li><button class="facebook" tabindex="0" type="button"><span><i class="fa fa-facebook"></i></span></button></li>
-                                <li><button class="twitter" tabindex="0" type="button"><span><i class="fa fa-twitter"></i></span></button></li>
-                                <li><button class="linkedin" tabindex="0" type="button"><span><i class="fa fa-linkedin"></i></span></button></li>
-                            </ul>
-                            <p class="subText">Don't have an account? <a href="register.html">Create free account</a></p>
+                            <p class="subText">Belum punya akun ? <a href="<?= base_url() ?>auth/register">Register</a></p>
                         </div>
                     </form>
                 </div>

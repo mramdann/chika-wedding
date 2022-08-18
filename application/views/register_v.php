@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -47,11 +46,11 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <form class="wpo-accountWrapper" action="#">
+                    <form class="wpo-accountWrapper" method="post" action="<?= base_url('auth/register') ?>">
                         <div class="wpo-accountInfo">
                             <div class="wpo-accountInfoHeader">
                                 <a href="#"><img src="<?= base_url() ?>assets/images/logo-2.png" alt=""></a>
-                                <a class="wpo-accountBtn" href="login.html">
+                                <a class="wpo-accountBtn" href="<?= base_url('auth') ?>">
                                     <span class="">Log in</span>
                                 </a>
                             </div>
@@ -59,54 +58,44 @@
                                 <img src="<?= base_url() ?>assets/images/login.svg" alt="">
                             </div>
                             <div class="back-home">
-                                <a class="wpo-accountBtn" href="index.html">
+                                <a class="wpo-accountBtn" href="<?= base_url() ?>">
                                     <span class="">Back To Home</span>
                                 </a>
                             </div>
                         </div>
                         <div class="wpo-accountForm form-style">
                             <div class="fromTitle">
-                                <h2>Signup</h2>
-                                <p>Sign into your pages account</p>
+                                <h2>Register</h2>
+                                <p>Registrasi Akun Chika Wedding</p>
                             </div>
                             <div class="row">
                                 <div class="col-lg-12 col-md-12 col-12">
-                                    <label for="name">Full Name</label>
-                                    <input type="text" id="name" name="name" placeholder="Your name here..">
+                                    <label for="nama_lengkap">Nama Lengkap</label>
+                                    <input type="text" id="name" name="nama_lengkap" required>
                                 </div>
                                 <div class="col-lg-12 col-md-12 col-12">
-                                    <label>Email</label>
-                                    <input type="text" id="email" name="email" placeholder="Your email here..">
+                                    <label>Username</label>
+                                    <input type="text" id="username" name="username" required>
+                                </div>
+                                <div class="col-lg-12 col-md-12 col-12">
+                                    <label>No HP</label>
+                                    <input type="number" id="no_hp" name="no_hp" required>
                                 </div>
                                 <div class="col-lg-12 col-md-12 col-12">
                                     <div class="form-group">
                                         <label>Password</label>
-                                        <input class="pwd2" type="password" placeholder="Your password here.." value="sfsg" name="pass">
+                                        <input class="pwd2" type="password" placeholder="Your password here.." id="password" name="password" required>
                                         <span class="input-group-btn">
                                             <button class="btn btn-default reveal3" type="button"><i class="fa fa-eye"></i></button>
                                         </span>
                                     </div>
                                 </div>
                                 <div class="col-lg-12 col-md-12 col-12">
-                                    <div class="form-group">
-                                        <label>Confirm Password</label>
-                                        <input class="pwd3" type="password" placeholder="Your password here.." value="ssres" name="pass">
-                                        <span class="input-group-btn">
-                                            <button class="btn btn-default reveal2" type="button"><i class="fa fa-eye"></i></button>
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="col-lg-12 col-md-12 col-12">
-                                    <button type="submit" class="wpo-accountBtn">Signup</button>
+                                    <button type="submit" id="btnsubmit" class="wpo-accountBtn">Daftar</button>
                                 </div>
                             </div>
                             <h4 class="or"><span>OR</span></h4>
-                            <ul class="wpo-socialLoginBtn">
-                                <li><button class="facebook" tabindex="0" type="button"><span><i class="fa fa-facebook"></i></span></button></li>
-                                <li><button class="twitter" tabindex="0" type="button"><span><i class="fa fa-twitter"></i></span></button></li>
-                                <li><button class="linkedin" tabindex="0" type="button"><span><i class="fa fa-linkedin"></i></span></button></li>
-                            </ul>
-                            <p class="subText">Don't have an account? <a href="login.html">Create free account</a></p>
+                            <p class="subText">Sudah punya akun ? <a href="<?= base_url() ?>auth">Login</a></p>
                         </div>
                     </form>
                 </div>

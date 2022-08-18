@@ -6,26 +6,49 @@ class Auth extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('Model_m', 'models');
+        $this->load->model('Auth_m', 'models');
     }
 
     public function index()
     {
         // cek apakah sudah login atau belum
-        // if (!$this->session->userdata('id_users')) {
+        if (!$this->session->userdata('id_users')) {
             $this->load->view('login_v');
-        // } else {
-            // redirect('dashboard');
-        // }
+        } else {
+            redirect('admin/home');
+        }
     }
-	
-	public function register()
+
+    public function register()
     {
         // cek apakah sudah login atau belum
         // if (!$this->session->userdata('id_users')) {
-            $this->load->view('register_v');
+        if ($this->input->post()) {
+            $data = [
+                'nama_lengkap' => $this->input->post('nama_lengkap'),
+                'username' => $this->input->post('username'),
+                'no_hp' => $this->input->post('no_hp'),
+                'password' => $this->input->post('password'),
+            ];
+
+            $res = $this->models->register($data);
+            if ($res) {
+                $this->session->set_flashdata('message', '<div class="alert alert-success">
+                                                                <strong>Success!</strong> Register Success.
+                                                            </div>');
+                redirect('auth');
+            } else {
+                $this->session->set_flashdata('message', '<div class="alert alert-danger">
+                                                                <strong>Failed!</strong> Register Failed.
+                                                            </div>');
+                redirect('auth');
+            }
+        }
+
+
+        $this->load->view('register_v');
         // } else {
-            // redirect('dashboard');
+        // redirect('dashboard');
         // }
     }
 
@@ -35,6 +58,8 @@ class Auth extends CI_Controller
         $password = $this->input->post('password');
 
         $ress = $this->models->login($username, $password);
+        // print_r($ress);
+        // exit;
 
         if ($ress) {
             // set flash data message dengan notifikasi sukses
@@ -45,13 +70,14 @@ class Auth extends CI_Controller
                                                         </div>');
 
             // simpan ke session
-            $this->session->set_userdata('id_users', $ress->id_users);
+            $this->session->set_userdata('id_user', $ress->id_user);
+            $this->session->set_userdata('id_customer', $ress->id_customer);
             $this->session->set_userdata('username', $ress->username);
             $this->session->set_userdata('nama_lengkap', $ress->nama_lengkap);
-            $this->session->set_userdata('role', $ress->role);
+            $this->session->set_userdata('role', isset($ress->id_users) ? 'admin' : 'customer');
 
             // redirect ke halaman dashboard
-            redirect('dashboard');
+            $ress->id_user ? redirect('admin/home') : redirect('home');
         } else {
             // set flash data message dengan notifikasi gagal
             $this->session->set_flashdata(
@@ -66,10 +92,7 @@ class Auth extends CI_Controller
     public function logout()
     {
         // hapus session
-        $this->session->unset_userdata('id_users');
-        $this->session->unset_userdata('username');
-        $this->session->unset_userdata('nama_lengkap');
-        $this->session->unset_userdata('role');
+        $this->session->sess_destroy();
         // redirect ke halaman login
         redirect('auth');
     }

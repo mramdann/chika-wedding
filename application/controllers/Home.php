@@ -12,7 +12,7 @@ class Home extends CI_Controller
     public function index()
     {
         $data['title'] = 'Halaman Utama';
-        $data['module'] = 'user/';
+        $data['paket'] = $this->models->getPaket();
 
         // templates
         $this->load->view('template2/header', $data);
@@ -20,4 +20,23 @@ class Home extends CI_Controller
         $this->load->view('template2/footer', $data);
     }
 
+    public function kontak()
+    {
+        $data['title'] = 'Hubungi Kami';
+
+        // templates
+        $this->load->view('template2/header', $data);
+        $this->load->view('kontak_v', $data); // content
+        $this->load->view('template2/footer', $data);
+    }
+
+    public function tentang()
+    {
+        $data['title'] = 'Tentang Kami';
+
+        // templates
+        $this->load->view('template2/header', $data);
+        $this->load->view('tentang_v', $data); // content
+        $this->load->view('template2/footer', $data);
+    }
 }
