@@ -30,31 +30,55 @@ class Laporan extends CI_Controller
         $list = $this->models->getDatatablesBooking('tbl_booking');
 
         $data = array();
-        $foto = '';
+        $status = '';
+        $st = '';
         $no = 0;
         foreach ($list as $dd) {
             $no++;
             $row = array();
 
-            if ($dd->foto !== '') {
-                $foto = '<img src="' . base_url('upload/' . $dd->foto) . '" alt="' . $dd->foto . '" class="img-profile" style="width: 100px"> ';
+            $pembayaran = $this->models->hitungBayar($dd->id_booking);
+
+            if ($dd->harga == $pembayaran) {
+                $status = '<span class="badge badge-success">Lunas</span>';
+            } else {
+                $status = '<span class="badge badge-danger">Belum Lunas</span>';
+            }
+
+            if ($dd->status == 'Menunggu Konfirmasi Admin') {
+                $st = '<span class="badge badge-warning">' . $dd->status . '</span>';
+            } else if ($dd->status == 'Menunggu Pembayaran Uang Muka (DP)') {
+                $st = '<span class="badge badge-info">' . $dd->status . '</span>';
+            } else if ($dd->status == 'Kunci Tanggal') {
+                $st = '<span class="badge badge-primary">' . $dd->status . '</span>';
+            } else if ($dd->status == 'Selesai') {
+                $st = '<span class="badge badge-success">' . $dd->status . '</span>';
+            } else if ($dd->status == 'Pesanan Ditolak') {
+                $st = '<span class="badge badge-danger">' . $dd->status . '</span><br> Catatan : ' . $dd->catatan;
+            } else if ($dd->status == 'Customer membatalkan pesanan') {
+                $st = '<span class="badge badge-danger">' . $dd->status . '</span>';
             }
 
             $row[] = $no;
             $row[] = $dd->nama_lengkap;
-            $row[] = $dd->no_hp;
             $row[] = $dd->nama_paket;
             $row[] = $dd->tgl_booking;
             $row[] = $dd->tgl_acara;
             $row[] = $dd->lokasi;
-
-            // add html for action
-            $row[] = '<a href="javascript:void(0)" title="Edit" onclick="edit(' . "'" . $dd->id_booking . "'" . ')"><i class="align-middle fas fa-fw fa-pen"></i></a>
-                <a href="javascript:void(0)" title="Hapus" onclick="hapus(' . "'" . $dd->id_booking . "'" . ')"><i class="align-middle fas fa-fw fa-trash"></i></a>';
+            $row[] = 'Rp. ' . number_format($dd->harga);
+            $row[] = 'Rp. ' . number_format($pembayaran);
+            $row[] = $status;
+            $row[] = $st;
 
             $data[] = $row;
         }
 
         echo json_encode($data);
+    }
+
+    public function print()
+    {
+        $data['data'] = $this->models->getDatatablesBooking('tbl_booking');
+        $this->load->view('admin/laporan_print_v', $data);
     }
 }

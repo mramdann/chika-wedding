@@ -16,14 +16,14 @@ class Admin_m extends CI_Model
         return $query->result();
     }
 
-    public function getDatatablesBooking($table)
+    public function getDatatablesBooking($table, $tgl = null)
     {
-        $query = $this->db->select('*')
-            ->from($table . ' a')
-            ->join('tbl_paket b', 'a.id_paket = b.id_paket')
-            ->join('tbl_customer c', 'a.id_customer = c.id_customer')
-            ->order_by('a.id_booking', 'desc')
-            ->get();
+        $this->db->select('*');
+        $this->db->from($table . ' a');
+        $this->db->join('tbl_paket b', 'a.id_paket = b.id_paket');
+        $this->db->join('tbl_customer c', 'a.id_customer = c.id_customer');
+        $this->db->order_by('a.id_booking', 'desc');
+        $query =   $this->db->get();
 
         return $query->result();
     }

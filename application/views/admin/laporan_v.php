@@ -1,3 +1,12 @@
+<style>
+    @media print {
+
+        .dataTables_wrapper th,
+        td {
+            white-space: normal;
+        }
+    }
+</style>
 <div class="container-fluid" id="container-wrapper">
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800"><?= $title ?></h1>
@@ -11,6 +20,7 @@
         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
             <h6 class="m-0 font-weight-bold text-primary"><?= $title ?></h6>
             <!-- <button class="btn btn-sm btn-success" onclick="add_new()">Tambah Data</button> -->
+            <a href="<?= base_url('admin/laporan/print') ?>" class="btn btn-sm btn-success">Print</a>
             <button class="btn btn-sm btn-success" onclick="reload_table()">Reload</button>
         </div>
         <div class="table-responsive p-3">
@@ -19,15 +29,14 @@
                     <tr>
                         <th>No</th>
                         <th>Nama Customer</th>
-                        <th>No Hp</th>
                         <th>Paket Dipesan</th>
                         <th>Tgl Booking</th>
                         <th>Tgl Acara</th>
                         <th>Lokasi</th>
                         <th>Harga</th>
                         <th>Jml Bayar</th>
+                        <th>Pembayaran</th>
                         <th>Status</th>
-                        <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody></tbody>
