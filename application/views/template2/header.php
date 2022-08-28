@@ -82,6 +82,11 @@
                                             <li><a href="<?= base_url('home/kontak') ?>">Kontak</a></li>
                                             <li><a href="<?= base_url('home/tentang') ?>">Tentang Kami</a></li>
 
+                                            <?php if ($this->session->userdata('id_customer')) { ?>
+                                                <li><a href="<?= base_url('home/akun') ?>"> Akun</a></li>
+                                                <li><a href="<?= base_url('auth/logout') ?>"> Logout</a></li>
+                                            <?php } ?>
+
                                         </ul>
 
                                     </div><!-- end of nav-collapse -->
@@ -89,7 +94,11 @@
                                 <div class="col-lg-2 col-md-2 col-2">
                                     <div class="header-right">
                                         <div class="mini-cart">
-                                            <a href="<?= base_url('auth') ?>" class="cart-toggle-btn" title="Akun"> <i class="fi flaticon-user"></i> </a>
+                                            <?php if ($this->session->userdata('id_customer')) { ?>
+                                                <a href="<?= base_url('home/akun') ?>" class="cart-toggle-btn" title="Akun"> <i class="fi flaticon-user"></i> </a>
+                                            <?php } else { ?>
+                                                <a href="<?= base_url('auth') ?>" class="cart-toggle-btn" title="Akun"> <i class="fi flaticon-user"></i> </a>
+                                            <?php } ?>
                                         </div>
                                     </div>
                                 </div>

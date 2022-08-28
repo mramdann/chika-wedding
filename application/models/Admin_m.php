@@ -22,6 +22,17 @@ class Admin_m extends CI_Model
             ->from($table . ' a')
             ->join('tbl_paket b', 'a.id_paket = b.id_paket')
             ->join('tbl_customer c', 'a.id_customer = c.id_customer')
+            ->order_by('a.id_booking', 'desc')
+            ->get();
+
+        return $query->result();
+    }
+
+    public function getDatatablesCustomer($table)
+    {
+        $query = $this->db->select('*')
+            ->from($table . ' a')
+            ->order_by('a.id_customer', 'desc')
             ->get();
 
         return $query->result();
@@ -76,5 +87,34 @@ class Admin_m extends CI_Model
         }
 
         return $res;
+    }
+
+    public function getBookingByid($id)
+    {
+        $query = $this->db->select('*')
+            ->from('tbl_booking a')
+            ->join('tbl_paket b', 'a.id_paket = b.id_paket')
+            ->join('tbl_customer c', 'a.id_customer = c.id_customer')
+            ->where('a.id_booking', $id)
+            ->order_by('a.id_booking', 'desc')
+            ->get();
+        return $query->row();
+    }
+
+    public function getPembayaran($id)
+    {
+        return $this->db->get_where('tbl_pembayaran', ['id_booking' => $id])->result();
+    }
+
+    public function hitungBayar($id)
+    {
+        $query = $this->db->get_where('tbl_pembayaran', ['id_booking' => $id, 'status_pembayaran' => 1])->result();
+
+        $jlh = 0;
+        foreach ($query as $row) {
+            $jlh += $row->nominal;
+        }
+
+        return $jlh;
     }
 }

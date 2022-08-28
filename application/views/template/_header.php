@@ -42,6 +42,12 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" href="<?= base_url() ?>admin/customer">
+                    <i class="fas fa-fw fa-user"></i>
+                    <span>Data Customer</span>
+                </a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="<?= base_url() ?>admin/booking">
                     <i class="fab fa-fw fa-wpforms"></i>
                     <span>Data Booking</span>

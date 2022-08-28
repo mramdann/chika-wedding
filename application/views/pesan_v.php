@@ -57,7 +57,7 @@
                                      <div class="biling-item-2">
                                          <div class="note-area">
                                              <p>Catatan pesanan </p>
-                                             <textarea name="massage" name="catatan_pesanan" placeholder="Catatan tentang pesanan Anda"></textarea>
+                                             <textarea name="catatan_pesanan" name="catatan_pesanan" placeholder="Catatan tentang pesanan Anda"></textarea>
                                          </div>
                                          <div class="submit-btn-area">
                                              <ul>
@@ -73,8 +73,9 @@
                          <div class="cout-order-area">
                              <div class="oreder-item ">
                                  <ul>
-                                     <li class="o-header">Pesanan Anda</li>
-                                     <li><?= $paket->nama_paket ?><span>Rp. <?= number_format($paket->harga) ?></span></li>
+                                     <li class="o-header">Pesanan Anda (<?= $paket->nama_paket ?>)</li>
+                                     <li>Uang Muka (DP)<span>Rp. <?= number_format(20 / 100 * $paket->harga) ?></span></li>
+                                     <li>Pelunasan <span>Rp. <?= number_format(80 / 100 * $paket->harga) ?></span></li>
                                      <li class="o-bottom">Total Harga <span>Rp. <?= number_format($paket->harga) ?></span></li>
                                  </ul>
                              </div>

@@ -45,6 +45,22 @@ class Paket extends CI_Controller
         $data['paket'] = $paket;
         $data['user'] = $this->models->getUserByid($this->session->userdata('id_customer'));
 
+        if ($this->input->post()) {
+
+            $data = [
+                'id_customer' => $this->session->userdata('id_customer'),
+                'id_paket' => $id,
+                'tgl_booking' => date('Y-m-d H:i:s'),
+                'lokasi' => $this->input->post('lokasi'),
+                'tgl_acara' => $this->input->post('tgl_acara'),
+                'catatan_pesanan' => $this->input->post('catatan_pesanan'),
+                'status' => 'Menunggu Konfirmasi Admin',
+            ];
+
+            $this->models->save($data);
+            redirect('home/akun');
+        }
+
         // templates
         $this->load->view('template2/header', $data);
         $this->load->view('pesan_v', $data); // content

@@ -19,14 +19,9 @@
                     <tr>
                         <th>No</th>
                         <th>Nama Customer</th>
-                        <th>Paket Dipesan</th>
-                        <th>Tgl Booking</th>
-                        <th>Tgl Acara</th>
-                        <th>Lokasi</th>
-                        <th>Harga</th>
-                        <th>Jml Bayar</th>
-                        <th>Pembayaran</th>
-                        <th>Status</th>
+                        <th>Username</th>
+                        <th>No Hp</th>
+                        <th>Alamat</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -35,6 +30,7 @@
         </div>
     </div>
 </div>
+
 
 <!-- javascript -->
 <script type="text/javascript">
